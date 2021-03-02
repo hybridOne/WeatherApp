@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="name_format">City: %1$s</string>
+    <string name="degrees_format">degrees: %1$d</string>
+    <string name="description_absent">No description</string>
+    <string name="city_format">%1$s %2$d degrees</string>
+    <string name="city_format2">City: %1$s</string>
+
+    <string name="save_button">Save</string>
+</resources>
