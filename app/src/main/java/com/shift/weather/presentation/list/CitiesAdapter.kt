@@ -1,4 +1,4 @@
-package com.shift.weather.adapters
+package com.shift.weather.presentation.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.shift.weather.R
-import com.shift.weather.models.City
+import com.shift.weather.domain.City
 
 class CitiesAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<CityHolder>() {
 
@@ -37,8 +37,6 @@ class CityHolder(itemView: View, private val onClick: (City) -> Unit) :
 
     fun bind(city: City) {
         cityText.text = itemView.context.getString(R.string.city_format, city.name, city.degrees)
-        descriptionText.text =
-            city.description ?: itemView.context.getString(R.string.description_absent)
         itemView.setOnClickListener { onClick(city) }
     }
 }

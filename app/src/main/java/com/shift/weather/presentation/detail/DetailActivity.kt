@@ -1,4 +1,4 @@
-package com.shift.weather.activities
+package com.shift.weather.presentation.detail
 
 import android.content.Context
 import android.content.Intent
@@ -7,12 +7,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-
-import com.shift.weather.CityApplication
-import com.shift.weather.presenter.DetailPresenter
-import com.shift.weather.view.DetailView
 import com.shift.weather.R
-import com.shift.weather.models.City
+import com.shift.weather.domain.City
+
 
 class DetailActivity : AppCompatActivity(), DetailView {
 
@@ -28,15 +25,12 @@ class DetailActivity : AppCompatActivity(), DetailView {
     }
 
     private val presenter by lazy {
-        DetailPresenter(
-                (application as CityApplication).cityRepository,
-                intent.getLongExtra(EXTRA_ID, 0)
-        )
+        DetailPresenterFactory.getPresenter(intent.getLongExtra(EXTRA_ID, 0))
     }
 
     private lateinit var cityText: TextView
     private lateinit var degreesText: TextView
-    private lateinit var descriptionText: EditText
+
     private lateinit var saveButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +45,6 @@ class DetailActivity : AppCompatActivity(), DetailView {
 
         cityText = findViewById(R.id.nameText)
         degreesText = findViewById(R.id.degreesText)
-        descriptionText = findViewById(R.id.descriptionInput)
         saveButton = findViewById(R.id.saveButton)
 
     }
@@ -60,11 +53,9 @@ class DetailActivity : AppCompatActivity(), DetailView {
 
         cityText.text = getString(R.string.name_format, city.name)
         degreesText.text = getString(R.string.degrees_format, city.degrees)
-        descriptionText.setText(city.description ?: getString(R.string.description_absent))
 
         saveButton.setOnClickListener {
-            val editedPerson = city.copy(description = descriptionText.text.toString())
-            presenter.onSaveButtonClicked(editedPerson)
+            finish()
         }
 
     }

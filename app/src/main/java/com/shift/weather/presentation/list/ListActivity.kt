@@ -1,25 +1,21 @@
-package com.shift.weather.activities
+package com.shift.weather.presentation.list
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.shift.weather.CityApplication
-import com.shift.weather.presenter.ListPresenter
-import com.shift.weather.view.ListView
 import com.shift.weather.R
-import com.shift.weather.adapters.CitiesAdapter
-import com.shift.weather.models.City
+import com.shift.weather.domain.City
+import com.shift.weather.presentation.detail.DetailActivity
 
 class ListActivity : AppCompatActivity(), ListView {
 
     private val presenter by lazy {
-        ListPresenter((application as CityApplication).cityRepository)
+        ListPresenterFactory.getListPresenter()
     }
 
     private lateinit var citiesList: RecyclerView
-
-    private val adapter by lazy {
-        CitiesAdapter(presenter::onCityClicked)
+    private val adapter = CitiesAdapter {
+        presenter.onCitiesClicked(it)
     }
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +29,7 @@ class ListActivity : AppCompatActivity(), ListView {
 
         override fun onResume(){
             super.onResume()
-            presenter.onScreenResumed()
+            presenter.onViewResumed()
         }
 
         override fun bindCities(list: List<City>) {

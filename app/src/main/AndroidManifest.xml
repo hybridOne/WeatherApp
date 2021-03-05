@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Weather">
 
-        <activity android:name=".activities.ListActivity">
+        <activity android:name=".presentation.list.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.DetailActivity">
+        <activity android:name=".presentation.detail.DetailActivity">
 
         </activity>
     </application>

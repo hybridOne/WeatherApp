@@ -1,14 +1,8 @@
 package com.shift.weather
 
 import android.app.Application
-import com.shift.weather.repo.CityRepository
+import com.shift.weather.data.CityRepositoryImpl
 
 class CityApplication : Application() {
 
-    lateinit var cityRepository: CityRepository
-
-    override fun onCreate() {
-        super.onCreate()
-        cityRepository = CityRepository()
-    }
 }
